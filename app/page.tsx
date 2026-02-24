@@ -22,7 +22,8 @@ export default async function Home() {
                         Sorry, an error occurred while fetching Todo items (Render may still
                         be spinning up the backend).
                     </p>
-                    <p>Please refresh in 1 minute</p>
+                    <p>Click this link to startup the backend server, then refresh in 1 minute:</p>
+                    <a href={`${process.env.BACKEND_URL}/api/items/`} target="_blank">{process.env.BACKEND_URL}/api/items/</a>
                 </div>
             </main>
         );
