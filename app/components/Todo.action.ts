@@ -5,19 +5,23 @@ export const addItem = async (formData: FormData) => {
     if (!title) {
         return;
     }
-    const res = await fetch(`${process.env.BACKEND_URL}/api/items/`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            title,
-            completed: false,
-        }),
-    });
-    const data = await res.json();
-    console.log(data);
-    return data.new_item;
+    try {
+        const res = await fetch(`${process.env.BACKEND_URL}/api/items/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title,
+                completed: false,
+            }),
+        });
+        const data = await res.json();
+        console.log(data);
+        return data.new_item;
+    } catch (error: any) { 
+        console.error(error);
+    }
 };
 
 export const toggleItem = async (id: number, completed: boolean) => {
@@ -42,7 +46,6 @@ export const toggleItem = async (id: number, completed: boolean) => {
     }
 };
 
-
 export const deleteItem = async (id: number) => {
     try {
         const res = await fetch(`${process.env.BACKEND_URL}/api/items/${id}/`, {
@@ -57,4 +60,4 @@ export const deleteItem = async (id: number) => {
         console.error(e);
         return { success: false };
     }
-}
+};
